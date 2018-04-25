@@ -48,7 +48,8 @@ do
 
 	/etc/init.d/dnsmasq stop
 	/etc/init.d/hostapd stop
-
+	chkconfig dnsmasq off
+	chkconfig hostapd off
 	    ;;
 
         "Quit")

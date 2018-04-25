@@ -1,4 +1,3 @@
-
 #!/bin/bash
 # NUKIM krnick
 echo "

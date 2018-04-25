@@ -2,8 +2,8 @@
 # NUKIM krnick
 echo "
 1. update and upgrade ,and then install hostapd,dnsmasq,isc-dhcp-server
-2. wifi 接網路wan ,由乙太網卡發網路
-3. 乙太網路接網路wan,由無線網卡發網路
+2. 乙太網路接網路wan,由無線網卡發網路
+3. wifi 接網路wan ,由乙太網卡發網路
 4. 還原設定
 5. 離開.
 
@@ -22,7 +22,7 @@ do
           	apt-get install isc-dhcp-server -y
           	;;
         "Option 2")
-            echo "---------wifi 接網路wan ,由乙太網卡發網路--------"
+            echo "---------乙太網路接網路wan,由無線網卡發網路--------"
             cp mode_give_NetworkFromEth/dhcpcd.conf /etc/dhcpcd.conf
             cp mode_give_NetworkFromEth/interfaces /etc/network/interfaces
             cp mode_give_NetworkFromEth/hostapd.conf /etc/hostapd/hostapd.conf
@@ -47,7 +47,7 @@ do
             echo "請確認wlan0 網路是否有IP ,dnsmasq 是否有啟動 才能有dhcp  IP"
             ;;
         "Option 3")
-            echo "-----乙太網路接網路wan,由無線網卡發網路------"
+            echo "----wifi 接網路wan ,由乙太網卡發網路------"
             cp mode_give_NetworkFromWifi/dhcpcd.conf_settingok /etc/dhcpcd.conf
             cp mode_give_NetworkFromWifi/isc-dhcp-server_settingok /etc/default/isc-dhcp-server
             cp mode_give_NetworkFromWifi/dhcpd.conf_settingok /etc/dhcp/dhcpd.conf
@@ -86,9 +86,6 @@ do
           	/etc/init.d/dnsmasq stop
           	/etc/init.d/isc-dhcp-server stop
           	/etc/init.d/hostapd stop
-          	chkconfig isc-dhcp-server off
-          	chkconfig dnsmasq off
-          	chkconfig hostapd off
           	    ;;
 
         "Quit")

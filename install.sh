@@ -53,6 +53,9 @@ do
             cp mode_give_NetworkFromWifi/isc-dhcp-server_settingok /etc/default/isc-dhcp-server
             cp mode_give_NetworkFromWifi/dhcpd.conf_settingok /etc/dhcp/dhcpd.conf
 
+
+	    ifconfig  eth0 192.168.4.1 netmask 255.255.255.0 broadcast 192.168.4.255
+
             /etc/init.d/isc-dhcp-server restart
 	    cp mode_give_NetworkFromWifi/sysctl.conf /etc/sysctl.conf
             sysctl -p

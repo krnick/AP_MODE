@@ -17,10 +17,10 @@ select opt in "${options[@]}"
 do
     case $opt in
         "Option 1")
-	apt-get update && apt-get upgrade -y
-	apt-get install dnsmasq hostapd -y
-	apt-get install isc-dhcp-server -y
-	   ;;
+          	apt-get update && apt-get upgrade -y
+          	apt-get install dnsmasq hostapd -y
+          	apt-get install isc-dhcp-server -y
+          	;;
         "Option 2")
             echo "---------wifi 接網路wan ,由乙太網卡發網路--------"
             cp mode_give_NetworkFromEth/dhcpcd.conf /etc/dhcpcd.conf
@@ -28,6 +28,7 @@ do
             cp mode_give_NetworkFromEth/hostapd.conf /etc/hostapd/hostapd.conf
             cp mode_give_NetworkFromEth/hostapd /etc/default/hostapd
             cp mode_give_NetworkFromEth/dnsmasq.conf /etc/dnsmasq.conf
+
             sudo sh -c "echo 1 >/proc/sys/net/ipv4/ip_forward "
             sysctl -p
 
@@ -37,17 +38,13 @@ do
 
             iptables-save
             sudo sh -c "iptables-save" > /etc/iptables.ipv4.nat
-            cp rc.local /etc/rc.local
+            cp mode_give_NetworkFromEth/rc.local /etc/rc.local
 
             /etc/init.d/dhcpcd restart
             /etc/init.d/dnsmasq restart
             /etc/init.d/hostapd restart
 
             echo "請確認wlan0 網路是否有IP ,dnsmasq 是否有啟動 才能有dhcp  IP"
-
-
-
-
             ;;
         "Option 3")
             echo "-----乙太網路接網路wan,由無線網卡發網路------"
@@ -67,7 +64,7 @@ do
 
             iptables-save
             sudo sh -c "iptables-save" > /etc/iptables.ipv4.nat
-            cp rc.local /etc/rc.local
+            cp mode_give_NetworkFromWifi/rc.local /etc/rc.local
 
 
 

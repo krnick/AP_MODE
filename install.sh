@@ -28,14 +28,15 @@ do
             cp mode_give_NetworkFromEth/hostapd.conf /etc/hostapd/hostapd.conf
             cp mode_give_NetworkFromEth/hostapd /etc/default/hostapd
             cp mode_give_NetworkFromEth/dnsmasq.conf /etc/dnsmasq.conf
-
-            sudo sh -c "echo 1 >/proc/sys/net/ipv4/ip_forward "
+	    cp mode_give_NetworkFromEth/sysctl.conf /etc/sysctl.conf
             sysctl -p
 
-            sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE 
-            sudo iptables -A FORWARD -i eth0 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT 
-            sudo iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT
 
+	    echo "firewall nat"
+            sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+            sudo iptables -A FORWARD -i eth0 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT
+            sudo iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT
+	    echo "firewall done"
             iptables-save
             sudo sh -c "iptables-save" > /etc/iptables.ipv4.nat
             cp mode_give_NetworkFromEth/rc.local /etc/rc.local
@@ -53,8 +54,7 @@ do
             cp mode_give_NetworkFromWifi/dhcpd.conf_settingok /etc/dhcp/dhcpd.conf
 
             /etc/init.d/isc-dhcp-server restart
-            echo 1 > /proc/sys/net/ipv4/ip_forward
-            sudo sh -c "echo 1 >/proc/sys/net/ipv4/ip_forward "
+	    cp mode_give_NetworkFromWifi/sysctl.conf /etc/sysctl.conf
             sysctl -p
 
             iptables -F

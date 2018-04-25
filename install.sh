@@ -52,12 +52,14 @@ do
             ;;
         "Option 3")
             echo "-----乙太網路接網路wan,由無線網卡發網路------"
-            cp mode_give_NetworkFromWifi/dhcpcd.conf /etc/dhcpcd.conf
-            cp mode_give_NetworkFromWifi/isc-dhcp-server /etc/default/isc-dhcp-server
-            cp mode_give_NetworkFromWifi/dhcpd.conf /etc/dhcp/dhcpd.conf
+            cp mode_give_NetworkFromWifi/dhcpcd.conf_settingok /etc/dhcpcd.conf
+            cp mode_give_NetworkFromWifi/isc-dhcp-server_settingok /etc/default/isc-dhcp-server
+            cp mode_give_NetworkFromWifi/dhcpd.conf_settingok /etc/dhcp/dhcpd.conf
 
             /etc/init.d/isc-dhcp-server restart
             echo 1 > /proc/sys/net/ipv4/ip_forward
+            sudo sh -c "echo 1 >/proc/sys/net/ipv4/ip_forward "
+            sysctl -p
 
             iptables -A FORWARD -i eth0 -o wlan0 -j ACCEPT
             iptables -A FORWARD -i wlan0 -o eth0 -m state --state ESTABLISHED,RELATED  -j ACCEPT

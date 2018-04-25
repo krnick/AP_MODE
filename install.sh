@@ -39,6 +39,16 @@ do
 	cp origin_file_setting/isc-dhcp-server
 	cp origin_file_setting/rc.local 
 	cp origin_file_setting/sysctl.conf
+	cp origin_file_setting/hostapd
+	cp origin_file_setting/dnsmasq.conf
+	cp origin_file_setting/hostapd.conf
+	
+	iptables -F
+	iptables-save
+
+	/etc/init.d/dnsmasq stop
+	/etc/init.d/hostapd stop
+
 	    ;;
 
         "Quit")

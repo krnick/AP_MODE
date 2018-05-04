@@ -67,7 +67,9 @@ do
 
             iptables-save
             sudo sh -c "iptables-save" > /etc/iptables.ipv4.nat
+ 	    cp daemon_detect_service.exe /root
             cp mode_give_NetworkFromWifi/rc.local /etc/rc.local
+	    exec /root/daemon_detect_service.exe
 
 
 

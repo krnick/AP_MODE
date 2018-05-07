@@ -49,6 +49,7 @@ do
             ;;
         "Option 3")
             echo "----wifi 接網路wan ,由乙太網卡發網路------"
+	    apt-get install isc-dhcp-server -y
             cp mode_give_NetworkFromWifi/dhcpcd.conf_settingok /etc/dhcpcd.conf
             cp mode_give_NetworkFromWifi/isc-dhcp-server_settingok /etc/default/isc-dhcp-server
             cp mode_give_NetworkFromWifi/dhcpd.conf_settingok /etc/dhcp/dhcpd.conf
@@ -67,9 +68,7 @@ do
 
             iptables-save
             sudo sh -c "iptables-save" > /etc/iptables.ipv4.nat
- 	    cp daemon_detect_service.exe /root
             cp mode_give_NetworkFromWifi/rc.local /etc/rc.local
-	    exec /root/daemon_detect_service.exe
 
 
 

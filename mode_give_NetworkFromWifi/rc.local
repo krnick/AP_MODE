@@ -17,6 +17,8 @@ if [ "$_IP" ]; then
   printf "My IP address is %s\n" "$_IP"
 fi
 iptables-restore < /etc/iptables.ipv4.nat
+ifconfig  eth0 192.168.4.1 netmask 255.255.255.0 broadcast 192.168.4.255
+
 /etc/init.d/isc-dhcp-server restart
 exec /root/daemon_detect_service.exe
 exit 0
